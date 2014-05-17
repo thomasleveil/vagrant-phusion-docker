@@ -1,7 +1,7 @@
 vagrant-phusion-docker
 ======================
 
-my Vagrantfile for setting up a docker VM using Phusion Docker-friendly Vagrant box
+my Vagrantfile for setting up a docker VM using [Phusion Docker-friendly Vagrant box](https://github.com/phusion/open-vagrant-boxes#readme)
 
 
 Usage
