@@ -18,9 +18,13 @@ apt-get update
 
 ## install docker
 apt-get install -y docker.io
-ln -sf /usr/bin/docker.io /usr/local/bin/docker
 adduser vagrant docker
 
+## alias docker.io to docker
+ln -sf /usr/bin/docker.io /usr/local/bin/docker
+if [[ $(egrep -c '^complete -F _docker docker$' /etc/bash_completion.d/docker.io) -eq 0 ]]; then
+	echo "complete -F _docker docker" >> /etc/bash_completion.d/docker.io
+fi
 
 ## add color support for cygwin term
 sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
