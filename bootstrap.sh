@@ -21,3 +21,6 @@ apt-get install -y docker.io
 ln -sf /usr/bin/docker.io /usr/local/bin/docker
 adduser vagrant docker
 
+
+## add color support for cygwin term
+sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
