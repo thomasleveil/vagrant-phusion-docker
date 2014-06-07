@@ -1,0 +1,9 @@
+# Ignore everything in root dir
+/*
+
+
+# Except for 
+!/Vagrantfile
+!/README.md
+!/.gitignore
+
