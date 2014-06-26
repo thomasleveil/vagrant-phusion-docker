@@ -29,3 +29,6 @@ fi
 
 ## add color support for cygwin term
 sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
+
+## liquidshell
+curl -sL http://goo.gl/klY2oO | sudo -u vagrant -i bash
