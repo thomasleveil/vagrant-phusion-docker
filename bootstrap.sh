@@ -14,13 +14,12 @@ if [[ $(grep -c "deb mirror://" /etc/apt/sources.list) -eq 0 ]]; then
 		EOF
 fi
 
-apt-get update
-
 ## install docker
-curl -sL https://get.docker.io/ | sh
-curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
-adduser vagrant docker
-
+if [[ $(groups vagrant | grep -q docker) -ne 0 ]]; then
+	curl -sL https://get.docker.io/ | sh
+	curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
+	adduser vagrant docker
+fi
 
 ## add color support for cygwin term
 sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
