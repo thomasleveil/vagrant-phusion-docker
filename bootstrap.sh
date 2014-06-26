@@ -17,14 +17,14 @@ fi
 ## install docker
 if [[ $(groups vagrant | grep -q docker) -ne 0 ]]; then
 	echo "installing Docker"
-	curl -sL https://get.docker.io/ | sh
-	curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
-	adduser vagrant docker
+	curl -s https://get.docker.io/ubuntu/ | sh
 else
 	echo "upgrading Docker"
 	apt-get update
-	apt-get -y install docker
+	apt-get -y install lxc-docker
 fi
+curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
+adduser vagrant docker
 
 
 ## add color support for cygwin term
