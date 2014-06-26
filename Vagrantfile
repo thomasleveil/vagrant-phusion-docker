@@ -3,6 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "phusion/ubuntu-14.04-amd64"
+  config.vm.hostname = "docker"
 
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   
@@ -17,6 +18,5 @@ Vagrant.configure(2) do |config|
     vb.cpus = 4
   end
 
-   
   config.vm.provision :shell, :path => "bootstrap.sh"
 end
