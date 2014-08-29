@@ -1,21 +1,7 @@
 #!/bin/bash
 
-# set up APT mirrors
-if [[ $(grep -c "deb mirror://" /etc/apt/sources.list) -eq 0 ]]; then
-	echo "setting up APT mirrors"
-	ed -s /etc/apt/sources.list <<-EOF
-		0a
-		deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse
-		deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse
-		deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse
-		deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse
-		.
-		w
-		EOF
-fi
-
 ## install docker
-if [[ $(groups vagrant | grep -q docker) -ne 0 ]]; then
+if ! groups vagrant | grep -q docker; then
 	echo "installing Docker"
 	curl -s https://get.docker.io/ubuntu/ | sh
 else
