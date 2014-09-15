@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sed -i 's|http://us.archive.ubuntu.com|http://fr.archive.ubuntu.com|g' /etc/apt/sources.list
+
 ## install docker
 if ! groups vagrant | grep -q docker; then
 	echo "installing Docker"
@@ -12,6 +14,9 @@ fi
 curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
 adduser vagrant docker
 
+## install pip and fig
+curl -sL https://bootstrap.pypa.io/get-pip.py | python
+pip install fig
 
 ## add color support for cygwin term
 sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
