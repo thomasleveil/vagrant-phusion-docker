@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sed -i 's|http://us.archive.ubuntu.com|http://fr.archive.ubuntu.com|g' /etc/apt/sources.list
-
 ## install docker
 if ! groups vagrant | grep -q docker; then
 	echo "installing Docker"
