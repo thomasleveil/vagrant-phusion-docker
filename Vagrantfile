@@ -20,20 +20,24 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SCRIPT
     ## install docker
-    if ! groups vagrant | grep -q docker; then
+    if ! type docker >/dev/null; then
       echo "installing Docker"
-      curl -s https://get.docker.com/ | sh
+      curl -sL https://get.docker.io/ | sh
+      curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
+      adduser vagrant docker
     else
       echo "upgrading Docker"
       apt-get update
       apt-get -y install lxc-docker
     fi
-    curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
-    adduser vagrant docker
 
-    ## install pip and docker-compose
-    curl -sL https://bootstrap.pypa.io/get-pip.py | python
-    pip install docker-compose
+    if ! type pip >/dev/null; then
+      echo "installing pip"
+      curl -sL https://bootstrap.pypa.io/get-pip.py | python
+    fi
+
+    echo "upgrading docker-compose"
+    pip install -U docker-compose
 
     ## add color support for cygwin term
     sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
@@ -41,7 +45,8 @@ Vagrant.configure(2) do |config|
     ## liquidshell
     curl -sL http://goo.gl/klY2oO | sudo -u vagrant -i bash
 
-    echo "cd /vagrant" >> /home/vagrant/.bashrc
+    ## cd /vagrant at login
+    grep -qE '^cd /vagrant$' /home/vagrant/.bashrc || echo 'cd /vagrant' >> /home/vagrant/.bashrc
 
   SCRIPT
 end
