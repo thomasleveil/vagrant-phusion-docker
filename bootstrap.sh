@@ -3,7 +3,7 @@
 ## install docker
 if ! groups vagrant | grep -q docker; then
 	echo "installing Docker"
-	curl -s https://get.docker.io/ubuntu/ | sh
+	curl -s https://get.docker.com/ | sh
 else
 	echo "upgrading Docker"
 	apt-get update
