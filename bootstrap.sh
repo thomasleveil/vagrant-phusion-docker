@@ -21,3 +21,6 @@ sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;
 
 ## liquidshell
 curl -sL http://goo.gl/klY2oO | sudo -u vagrant -i bash
+
+echo "cd /vagrant" >> /home/vagrant/.bashrc
+
