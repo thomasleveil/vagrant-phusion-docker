@@ -12,9 +12,9 @@ fi
 curl -sL https://raw.githubusercontent.com/dotcloud/docker/master/contrib/completion/bash/docker > /etc/bash_completion.d/docker
 adduser vagrant docker
 
-## install pip and fig
+## install pip and docker-compose
 curl -sL https://bootstrap.pypa.io/get-pip.py | python
-pip install fig
+pip install docker-compose
 
 ## add color support for cygwin term
 sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
