@@ -38,6 +38,9 @@ Vagrant.configure(2) do |config|
 
     echo "upgrading docker-compose"
     pip install -U docker-compose
+    
+    echo "installing docker-compose command completion"
+     curl -sL https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
 
     ## add color support for cygwin term
     sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
