@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
     fi
 
     echo "installing docker-compose"
-    url -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -sL https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     hmod +x /usr/local/bin/docker-compose
     
     echo "installing docker-compose command completion"
