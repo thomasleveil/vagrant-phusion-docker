@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
 
     echo "installing docker-compose"
     curl -sL https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    hmod +x /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
     
     echo "installing docker-compose command completion"
     curl -sL https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
