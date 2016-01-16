@@ -31,16 +31,12 @@ Vagrant.configure(2) do |config|
       apt-get -y install lxc-docker
     fi
 
-    if ! type pip >/dev/null; then
-      echo "installing pip"
-      curl -sL https://bootstrap.pypa.io/get-pip.py | python
-    fi
-
-    echo "upgrading docker-compose"
-    pip install -U docker-compose
+    echo "installing docker-compose"
+    url -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    hmod +x /usr/local/bin/docker-compose
     
     echo "installing docker-compose command completion"
-     curl -sL https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+    curl -sL https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
 
     ## add color support for cygwin term
     sed -i 's/xterm-color) color_prompt=yes;;/xterm-color|cygwin) color_prompt=yes;;/' /home/vagrant/.bashrc
